@@ -3,6 +3,17 @@ body {
   height: 100%;
 }
 
+body {
+background-color: black;
+background: url(imagens/mathematical-background/rm373batch13-086.jpg) no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  
+}
+
 .form-container {
   max-width: 680px;
   padding: 1rem;
