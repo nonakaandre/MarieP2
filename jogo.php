@@ -18,7 +18,7 @@
     <header class="jogo">
         <h1>MathCard</h1>
         <p>Jogador:
-            <?php echo $_SESSION['nome'] ?? 'Visitante'; ?>!
+            <?php echo $_SESSION['nome'] ?? 'Visitante'; ?>
         </p>
     </header>
     <div class="principal">
