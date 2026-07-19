@@ -228,6 +228,8 @@ function usarDica() {
     document.getElementById("btnDica").disabled = true;
     
     document.getElementById("btnDica").classList.add("usada");
+
+    document.getElementById("btnDica").innerHTML = questoes[indiceAtual].dica;
     
 }
 
@@ -281,6 +283,8 @@ function usarMult() {
     document.getElementById("btnMult").classList.add("usada");
     
     document.getElementById("btnMult").disabled = true;
+
+    document.getElementById("btnMult").innerHTML = "Escolha uma alternativa";
 }
 
 function verificarRespostaMultipla(respostaEscolhida) {

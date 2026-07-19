@@ -361,6 +361,14 @@ body {
     transition: 0.2s;
 }
 
+#btnDica.carta.usada, #btnMult.carta.usada, #btnSkip.carta.usada {
+    background: #6b7280;
+    border: 2px dashed #4b5563;
+    cursor: not-allowed;
+    text-align: center;
+    margin-left: 10px;
+}
+
 #btnDica {
     background: url(imagens/mathematical-background/mathcard_bonus_dica.svg);
 }
