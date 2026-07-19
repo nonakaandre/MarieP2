@@ -176,7 +176,7 @@ body {
 body {
     font-family: orbitron, Arial, Helvetica, sans-serif;
     background: #111827;
-    background-image: url(imagens/mathematical-background/rm373batch13-086.jpg);
+    background-image: url(assets/imagens/mathematical-background/rm373batch13-086.jpg);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -202,22 +202,27 @@ body {
     background: #1f2937;
     border-radius: 18px;
     padding: 40px;
-    box-shadow: 0 12px 30px rgba(0,0,0,0.35);
-    position: relative;   /* necessário pro ::before se posicionar */
-    z-index: 0;            /* cria um contexto de empilhamento */
-    overflow: hidden;      /* garante que a imagem não vaze do border-radius */
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+    position: relative;
+    /* necessário pro ::before se posicionar */
+    z-index: 0;
+    /* cria um contexto de empilhamento */
+    overflow: hidden;
+    /* garante que a imagem não vaze do border-radius */
 }
-              /*  Cria o efeito de imagem de fundo com opacidade */
+
+/*  Cria o efeito de imagem de fundo com opacidade */
 .principal::before {
     content: "";
     position: absolute;
     inset: 0;
-    background-image: url(imagens/mathematical-background/mathVerde.jpg);
+    background-image: url(assets/imagens/mathVerde.jpg);
     background-size: cover;
     background-position: center;
     opacity: 0.1;
     z-index: -1;
-    border-radius: 18px; /* repete o radius pra imagem acompanhar as bordas arredondadas */
+    border-radius: 18px;
+    /* repete o radius pra imagem acompanhar as bordas arredondadas */
 }
 
 /* topo */
@@ -361,7 +366,9 @@ body {
     transition: 0.2s;
 }
 
-#btnDica.carta.usada, #btnMult.carta.usada, #btnSkip.carta.usada {
+#btnDica.carta.usada,
+#btnMult.carta.usada,
+#btnSkip.carta.usada {
     background: #6b7280;
     border: 2px dashed #4b5563;
     cursor: not-allowed;
@@ -370,16 +377,17 @@ body {
 }
 
 #btnDica {
-    background: url(imagens/mathematical-background/mathcard_bonus_dica.svg);
+    background: url(assets/imagens/mathcard_bonus_dica.svg);
 }
 
 #btnMult {
-    background: url(imagens/mathematical-background/mathcard_bonus_multiescolha.svg);
+    background: url(assets/imagens/mathcard_bonus_multiescolha.svg);
 }
 
 #btnSkip {
-    background: url(imagens/mathematical-background/mathcard_bonus_pular.svg);
+    background: url(assets/imagens/mathcard_bonus_pular.svg);
 }
+
 .usada {
     opacity: 0.5;
     cursor: not-allowed;
@@ -443,5 +451,5 @@ body {
         flex-wrap: wrap;
         gap: 20px;
     }
-    
+
 }

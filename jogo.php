@@ -55,6 +55,7 @@
         </div>
     </div>
     <script src="script.js"></script>
+    <script src="audio.js"></script>
 </body>
 
 </html>

@@ -2,6 +2,7 @@
 
 const tempoE1 = document.getElementById("tempo");
 
+
 let tempo = 30000;
 let cronometro = null;
 let nivel = "Iniciante";
@@ -25,6 +26,7 @@ function iniciarCronometro() {
     }, 1000);
 
 }
+
 
 function reiniciarCronometro(novoTempo = 30) {
     clearInterval(cronometro);
@@ -338,3 +340,7 @@ function atualizarNivel() {
 
     document.getElementById("nivel").innerText = nivel;
 }
+
+
+const audioManager = new AudioManager();
+audioManager.play();
