@@ -156,11 +156,11 @@ const texto = document.getElementById("pergunta");
 const inputResposta = document.getElementById("respostaInput");
 
 function mostrarQuestao() {
-    
+
     atualizarNivel();
 
     if (indiceAtual < questoes.length) {
-        
+
         document.getElementById("DicaPergunta").innerText = "";
 
         titulo.innerText = `Questão ${indiceAtual + 1}`;
@@ -185,30 +185,54 @@ function verificarResposta() {
 
     if (respostaUsuario === respostaCorreta) {
 
+        audioManager.playSfx('assets/audio/correct.mp3');
         let pontosGanhos = pontuacao_dica ? 50 : 100;
 
         pontuacao += pontosGanhos;
 
         atualizarPontuacao();
 
-        alert(`Resposta Correta! +${pontosGanhos} pontos`);
+        mostrarMensagem(`Resposta Correta! + ${pontosGanhos} pontos`, () => {
+            // as 4 linhas que precisam esperar a mensagem sumir
+            indiceAtual++;
+            inputResposta.value = "";
+            pontuacao_dica = false;
+            mostrarQuestao();
+        }, "sucesso");
 
     } else {
 
-        alert("Resposta incorreta!");
+        audioManager.playSfx('assets/audio/failure.mp3');
+
+        mostrarMensagem(`Resposta incorreta! A resposta correta é: ${respostaCorreta}`, () => {
+            // as 4 linhas que precisam esperar a mensagem sumir
+            indiceAtual++;
+            inputResposta.value = "";
+            pontuacao_dica = false;
+            mostrarQuestao();
+        }, "erro");
 
     }
 
-    indiceAtual++;
 
-        inputResposta.value = "";
-
-        pontuacao_dica = false;
-
-        mostrarQuestao();
 }
 
 mostrarQuestao();
+
+// MOSTRA A MENSAGEM NA TELA AO INVÉS DE UM ALERT
+function mostrarMensagem(texto, callback, estilo) {
+    document.getElementById("mensagemResposta").classList.add(estilo);
+    document.getElementById("mensagemResposta").innerHTML = texto;
+
+    document.getElementById("mensagemResposta").style.display = "block";
+
+    setTimeout(() => {
+        document.getElementById("mensagemResposta").style.display = "none";
+        callback();
+        document.getElementById("mensagemResposta").classList.remove(estilo);
+    }, 3000);
+
+}
 
 let cartaDicaUsada = false;
 let cartaMultUsada = false;
@@ -228,42 +252,42 @@ function usarDica() {
         questoes[indiceAtual].dica;
 
     document.getElementById("btnDica").disabled = true;
-    
+
     document.getElementById("btnDica").classList.add("usada");
 
     document.getElementById("btnDica").innerHTML = questoes[indiceAtual].dica;
-    
+
 }
 
 function usarPular() {
-    
+
     if (cartaPularUsada) {
         alert("Você já usou esta carta!");
         return;
     }
-    
+
     cartaPularUsada = true;
-    
+
     indiceAtual++;
-    
+
     document.getElementById("DicaPergunta").innerText = "";
-    
+
     mostrarQuestao();
-    
+
     document.getElementById("btnSkip").classList.add("usada");
-    
+
     document.getElementById("btnSkip").disabled = true;
 }
 
 function usarMult() {
-    
+
     if (cartaMultUsada) {
         alert("Você já usou esta carta!");
         return;
     }
-    
+
     cartaMultUsada = true;
-    
+
     const alternativas = questoes[indiceAtual].alternativas;
 
     const div = document.getElementById("alternativas");
@@ -275,7 +299,7 @@ function usarMult() {
 
         botao.innerText = alternativas[i];
 
-        botao.onclick = function() {
+        botao.onclick = function () {
             verificarRespostaMultipla(alternativas[i]);
         };
 
@@ -283,7 +307,7 @@ function usarMult() {
     }
 
     document.getElementById("btnMult").classList.add("usada");
-    
+
     document.getElementById("btnMult").disabled = true;
 
     document.getElementById("btnMult").innerHTML = "Escolha uma alternativa";
@@ -343,4 +367,14 @@ function atualizarNivel() {
 
 
 const audioManager = new AudioManager();
-audioManager.play();
+document.addEventListener('click', function desbloquearAudio() {
+    audioManager.play();
+    document.removeEventListener('click', desbloquearAudio);
+});
+
+document.getElementById('btnMute').textContent = audioManager.muted ? '🔇' : '🔊';
+
+document.getElementById('btnMute').addEventListener('click', function () {
+    audioManager.toggleMute();
+    this.textContent = audioManager.muted ? '🔇' : '🔊';
+});

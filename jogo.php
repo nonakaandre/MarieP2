@@ -32,11 +32,14 @@
                 <span>Nível: <span id="nivel">Iniciante</span></span>
             </div>
         </div>
-        <div class="resposta">
+         <div class="resposta">
             <form id="formResposta">
                 <input type="number" id="respostaInput" placeholder="Resposta">
                 <button type="button" onclick="verificarResposta()">Enviar</button>
             </form>
+        </div> 
+        <div id= "mensagemResposta">
+            <p></p>
         </div>
         <div class="cartas">
             <div class="carta" id="btnDica" onclick="usarDica()">
@@ -54,8 +57,9 @@
             <input type="number">
         </div>
     </div>
-    <script src="script.js"></script>
+    <button id="btnMute">🔊</button>
     <script src="audio.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>
