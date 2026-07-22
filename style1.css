@@ -240,6 +240,7 @@ body {
 }
 
 .usada {
+    background: url(assets/imagens/carta-usada.svg);
     opacity: 0.5;
     cursor: not-allowed;
 }
