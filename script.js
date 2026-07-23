@@ -189,38 +189,39 @@ function verificarResposta() {
         let pontosGanhos = pontuacao_dica ? 50 : 100;
 
         pontuacao += pontosGanhos;
-        if (pontuacao_dica == true) {
-            document.getElementById("btnDica").classList.add("usada");
-        }
 
 
         atualizarPontuacao();
 
         mostrarMensagem(`Resposta Correta! + ${pontosGanhos} pontos`, () => {
+            if (pontuacao_dica == true) {
+                document.getElementById("btnDica").classList.add("usada");
+                document.getElementById("btnDica").innerHTML = "";
+            }
             // as 4 linhas que precisam esperar a mensagem sumir
             indiceAtual++;
             inputResposta.value = "";
             pontuacao_dica = false;
             mostrarQuestao();
         }, "sucesso");
-        document.getElementsByClassName("usada")[0].style.background = "url(assets/imagens/carta-usada.svg)";
+
 
     } else {
 
         audioManager.playSfx('assets/audio/failure.mp3');
 
-        if (pontuacao_dica == true) {
-            document.getElementById("btnDica").classList.add("usada");
-        }
-
         mostrarMensagem(`Resposta incorreta! A resposta correta é: ${respostaCorreta}`, () => {
+            if (pontuacao_dica == true) {
+                document.getElementById("btnDica").classList.add("usada");
+                document.getElementById("btnDica").innerHTML = "";
+            }
             // as 4 linhas que precisam esperar a mensagem sumir
             indiceAtual++;
             inputResposta.value = "";
             pontuacao_dica = false;
             mostrarQuestao();
         }, "erro");
-        document.getElementsByClassName("usada")[0].style.background = "url(assets/imagens/carta-usada.svg)";
+
 
     }
 
@@ -230,7 +231,7 @@ function verificarResposta() {
 mostrarQuestao();
 
 // MOSTRA A MENSAGEM NA TELA AO INVÉS DE UM ALERT
-function mostrarMensagem(texto, callback, estilo) {
+function mostrarMensagem(texto, callback, estilo, usadaCard) {
     document.getElementById("mensagemResposta").classList.add(estilo);
     document.getElementById("mensagemResposta").innerHTML = texto;
 
@@ -240,7 +241,8 @@ function mostrarMensagem(texto, callback, estilo) {
         document.getElementById("mensagemResposta").style.display = "none";
         callback();
         document.getElementById("mensagemResposta").classList.remove(estilo);
-    }, 3000);
+    }, 2000);
+
 
 }
 
@@ -258,14 +260,7 @@ function usarDica() {
 
     pontuacao_dica = true;
 
-   // document.getElementById("DicaPergunta").innerText =
-        questoes[indiceAtual].dica;
-
-    document.getElementById("btnDica").disabled = true;
-
-    document.getElementById("btnDica").classList.add("usada");
-
-    
+    // document.getElementById("DicaPergunta").innerText = questoes[indiceAtual].dica;
 
     document.getElementById("btnDica").innerHTML = questoes[indiceAtual].dica;
 
@@ -288,7 +283,6 @@ function usarPular() {
 
     document.getElementById("btnSkip").classList.add("usada");
 
-    document.getElementById("btnSkip").disabled = true;
 }
 
 function usarMult() {
@@ -318,39 +312,46 @@ function usarMult() {
         div.appendChild(botao);
     }
 
-    document.getElementById("btnMult").classList.add("usada");
-
-    document.getElementById("btnMult").disabled = true;
-
     document.getElementById("btnMult").innerHTML = "Escolha uma alternativa";
 }
 
 function verificarRespostaMultipla(respostaEscolhida) {
+
     const respostaCorreta = questoes[indiceAtual].resposta;
 
     if (respostaEscolhida === respostaCorreta) {
 
+        audioManager.playSfx('assets/audio/correct.mp3');
         pontuacao += 50;
+
 
         atualizarPontuacao();
 
-        mostrarMensagem(`Resposta Correta! + ${pontosGanhos} pontos`, () => {
-            // as 4 linhas que precisam esperar a mensagem sumir
+        mostrarMensagem(`Resposta Correta! + 50 pontos`, () => {
+            if (cartaMultUsada == true) {
+                document.getElementById("btnMult").classList.add("usada");
+                document.getElementById("btnMult").innerHTML = "";
+            }
             indiceAtual++;
             document.getElementById("alternativas").innerHTML = "";
             mostrarQuestao();
         }, "sucesso");
-        document.getElementsByClassName("usada")[0].style.background = "url(assets/imagens/carta-usada.svg)";
-        //alert("Correto!");
+
+        // alert("Correto!");
     } else {
+
+        audioManager.playSfx('assets/audio/failure.mp3');
         mostrarMensagem(`Resposta incorreta! A resposta correta é: ${respostaCorreta}`, () => {
-            // as 4 linhas que precisam esperar a mensagem sumir
+            if (cartaMultUsada == true) {
+                document.getElementById("btnMult").classList.add("usada");
+                document.getElementById("btnMult").innerHTML = "";
+            }
             indiceAtual++;
             document.getElementById("alternativas").innerHTML = "";
             mostrarQuestao();
         }, "erro");
-        document.getElementsByClassName("usada")[0].style.background = "url(assets/imagens/carta-usada.svg)";
-        //alert("Errado!");
+
+        // alert("Errado!");
     }
 }
 
