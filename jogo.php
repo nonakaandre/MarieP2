@@ -34,8 +34,9 @@
         </div>
          <div class="resposta">
             <form id="formResposta">
-                <input type="number" id="respostaInput" placeholder="Resposta">
-                <button type="button" onclick="verificarResposta()">Enviar</button>
+                <input type="number" id="respostaInput" placeholder="Resposta" step="0.1" select>
+                <input type="submit" value="Enviar" onclick="verificarResposta()" id="btnEnviar">
+               
             </form>
         </div> 
         <div id= "mensagemResposta">

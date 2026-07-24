@@ -175,6 +175,25 @@ function mostrarQuestao() {
 
 }
 
+// Verifica a resposta com clique no "ENTER".
+
+// "function" aqui é uma função de callback
+// "event.preventDefault()" é um método que diz ao navegador: "não execute esse comportamento padrão dessa vez".
+/* Resumo do fluxo completo, na ordem real de execução
+1. Jogador digita um número no campo e aperta Enter
+2. O navegador detecta que isso deveria disparar um "submit" no form
+3. Como existe um listener registrado pra esse evento, a função é chamada, recebendo o objeto event
+4. event.preventDefault() roda primeiro, cancelando o recarregamento de página que aconteceria por padrão
+5. verificarResposta() roda em seguida, processando a resposta normalmente — exatamente como se o botão "Enviar" tivesse sido clicado*/
+
+document.getElementById("formResposta").addEventListener("submit", function (event) {
+    event.preventDefault();
+    verificarResposta();
+}
+
+);
+
+
 //Função para verificar se a resposta está correta
 
 function verificarResposta() {
@@ -273,6 +292,7 @@ function usarPular() {
         return;
     }
 
+    audioManager.playSfx('assets/audio/fast.mp3');
     cartaPularUsada = true;
 
     indiceAtual++;
